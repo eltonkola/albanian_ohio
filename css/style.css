@@ -1,0 +1,342 @@
+/* ============================================================
+   Albanians in Ohio — Static Research Site
+   ============================================================ */
+
+:root {
+  --red:    #cc0000;
+  --dk:     #1a1a2e;
+  --bg:     #f5f6fa;
+  --card:   #ffffff;
+  --text:   #2c2c2c;
+  --muted:  #6c757d;
+  --border: #dee2e6;
+  --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--dk) 0%, #16213e 40%, #920000 100%);
+  color: #fff;
+  padding: 80px 40px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 6px;
+  background: var(--red);
+}
+.hero .eagle { font-size: 4rem; margin-bottom: 16px; display: block; }
+.hero h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+.hero .subtitle {
+  font-size: 1.1rem;
+  opacity: .8;
+  max-width: 700px;
+  margin: 0 auto 12px;
+}
+.hero .meta-line {
+  font-size: .82rem;
+  opacity: .55;
+}
+
+/* ---------- Sticky nav ---------- */
+.nav {
+  background: var(--dk);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+.nav a {
+  display: inline-block;
+  color: #aaa;
+  text-decoration: none;
+  padding: 12px 16px;
+  font-size: .85rem;
+  font-weight: 500;
+  transition: color .2s, border-color .2s;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover, .nav a.active {
+  color: #fff;
+  border-bottom-color: var(--red);
+}
+
+/* ---------- Container ---------- */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 36px 24px;
+}
+
+/* ---------- Sections ---------- */
+section { margin-bottom: 56px; scroll-margin-top: 60px; }
+section > h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--dk);
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+section > h2 .icon { font-size: 1.4rem; }
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dk);
+  margin: 24px 0 10px;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+  margin-bottom: 20px;
+}
+
+/* ---------- Stat boxes ---------- */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.stat-box {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px;
+  text-align: center;
+  border-left: 5px solid var(--red);
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+  transition: transform .15s;
+}
+.stat-box:hover { transform: translateY(-2px); }
+.stat-box .num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1.1;
+}
+.stat-box .label {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ---------- Tables ---------- */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+  margin: 14px 0;
+}
+th {
+  background: var(--dk);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+}
+tr:nth-child(even) { background: #f9f9fc; }
+tr:hover { background: #eef2ff; }
+
+/* ---------- Charts ---------- */
+.chart-wrap {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 14px 0;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+}
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.chart-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+/* ---------- Map ---------- */
+#map-columbus, #map-cleveland, #map-ohio {
+  height: 480px;
+  border-radius: var(--radius);
+  margin: 14px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+.map-controls {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+.map-controls button {
+  padding: 8px 16px;
+  border: 2px solid var(--dk);
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .85rem;
+  font-weight: 500;
+  transition: all .15s;
+}
+.map-controls button:hover, .map-controls button.active {
+  background: var(--dk);
+  color: #fff;
+}
+
+/* ---------- Callout ---------- */
+.callout {
+  background: #fff8e1;
+  border-left: 4px solid #f9a825;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+  font-size: .9rem;
+}
+.callout.info {
+  background: #e3f2fd;
+  border-left-color: #1976d2;
+}
+.callout.red {
+  background: #fce4ec;
+  border-left-color: var(--red);
+}
+.callout strong { color: inherit; }
+
+/* ---------- Timeline ---------- */
+.timeline { position: relative; padding-left: 32px; margin: 20px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--red);
+  border-radius: 2px;
+}
+.tl-event { position: relative; margin-bottom: 22px; }
+.tl-event::before {
+  content: '';
+  position: absolute;
+  left: -25px; top: 6px;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--red);
+}
+.tl-event .year {
+  font-weight: 700;
+  color: var(--red);
+  font-size: .88rem;
+}
+.tl-event .desc { font-size: .9rem; }
+
+/* ---------- Badge ---------- */
+.badge {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: .7rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.badge.sample {
+  background: #f9a825;
+  color: #333;
+}
+
+/* ---------- Sources ---------- */
+.sources {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.sources a { color: var(--red); }
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--muted);
+  font-size: .82rem;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+  background: #fff;
+}
+.footer a { color: var(--red); }
+
+/* ---------- Tabs ---------- */
+.tab-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+.tab-btn {
+  padding: 8px 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all .15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.8rem; }
+  .chart-grid, .chart-grid-3 { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  #map-columbus, #map-cleveland, #map-ohio { height: 350px; }
+}
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: 1fr; }
+  .container { padding: 20px 14px; }
+}

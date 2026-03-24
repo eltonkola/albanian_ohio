@@ -1,0 +1,18 @@
+{
+  "total_ohio_broad": 4570,
+  "total_ohio_ancestry_only": 4107,
+  "unweighted_records_broad": 205,
+  "unweighted_records_ancestry": 183,
+  "filters_used": {
+    "albanian_ancestry_code": 100,
+    "birthplace_codes": [
+      100,
+      167,
+      168,
+      152,
+      154,
+      147
+    ]
+  },
+  "note": "Broad = Albanian ancestry OR born in Albania/Kosovo/Montenegro/N.Macedonia/Serbia/Yugoslavia. Ancestry-only = self-reported Albanian ancestry (ANC1P/ANC2P=100)."
+}

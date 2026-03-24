@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albanians in Ohio — Open Research Project</title>
+<meta name="description" content="Cross-referenced Census data on the Albanian and Kosovar population in Ohio and the Columbus metro area. Open-source, forkable research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <span class="eagle">&#129413;</span>
+  <h1>Albanians in Ohio</h1>
+  <p class="subtitle">An open, cross-referenced research project on the Albanian &amp; Kosovar population in Ohio and the Columbus metro area. Built on U.S. Census data. Fork it, improve it, contribute.</p>
+  <p class="meta-line">Data: ACS 2019-2023 &bull; PUMS Microdata &bull; Harvard Growth Lab &bull; Last updated March 2026</p>
+</header>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <a href="#summary">Summary</a>
+  <a href="#datasources">Data Sources</a>
+  <a href="#population">Population</a>
+  <a href="#geography">Geography</a>
+  <a href="#demographics">Demographics</a>
+  <a href="#education">Education</a>
+  <a href="#occupation">Work &amp; Income</a>
+  <a href="#migration">Migration</a>
+  <a href="#history">History</a>
+  <a href="#comparison">National</a>
+  <a href="#methodology">Data &amp; Methods</a>
+  <a href="columbus.html" style="color:#e67e22;font-weight:600;">Columbus Metro &rarr;</a>
+  <a href="https://github.com/eltonkola/albanian-ohio" target="_blank" style="margin-left:auto;color:#6c9;">GitHub &rarr;</a>
+</nav>
+
+<div class="container">
+
+<!-- ========== SAMPLE DATA BANNER ========== -->
+<div class="callout red" id="sample-banner" style="display:none;">
+  <strong>Sample Data Mode:</strong> The charts below use estimated figures derived from published ACS tables and academic research. For precise PUMS-derived numbers, download the Ohio PUMS microdata and re-run the processing scripts. See the <a href="#methodology">Data &amp; Methods</a> section.
+</div>
+
+<!-- ==================== SUMMARY ==================== -->
+<section id="summary">
+  <h2><span class="icon">&#128202;</span> Executive Summary</h2>
+  <div class="stats-row" id="stats-row">
+    <!-- Filled by JS -->
+  </div>
+  <div class="card">
+    <p>Ohio is home to one of the most significant Albanian and Kosovar communities in the United States, anchored by two major clusters: <strong>Greater Cleveland</strong> (the older, larger hub centered on Lakewood, Fairview Park, and Rocky River) and <strong>Columbus / Central Ohio</strong> (a growing community with strong post-1990s Kosovo-origin roots).</p>
+    <p style="margin-top:10px;">Official ACS ancestry data records approximately <strong>4,100 people reporting Albanian ancestry</strong> statewide. Cross-referencing with birthplace data (Albania and Kosovo-born), the PUMS broad estimate (adding Albania/Kosovo-born who didn't report Albanian ancestry) rises to <strong>~4,600</strong>. Community estimates place the true number significantly higher &mdash; see the <a href="#datasources">Data Sources</a> section for why Census data undercounts this population.</p>
+  </div>
+  <div class="callout">
+    <strong>Why Census Data Undercounts Albanians in Ohio</strong><br>
+    The ACS ancestry question captures only those who write "Albanian." Many ethnic Albanians from <strong>Kosovo</strong> report "Kosovar," "Yugoslav," or "Serbian." Those from <strong>North Macedonia</strong> often report "Macedonian." Those from <strong>Montenegro</strong> may report "Montenegrin." Second/third generation individuals may report mixed ancestry. Census undercounting of refugee and immigrant communities is well-documented. Cross-referencing ancestry, birthplace, and language data yields significantly higher estimates.
+  </div>
+</section>
+
+<!-- ==================== DATA SOURCES EXPLAINER ==================== -->
+<section id="datasources">
+  <h2><span class="icon">&#128218;</span> Understanding the Data Sources</h2>
+
+  <div class="card">
+    <h3>What is the ACS (American Community Survey)?</h3>
+    <p>The <strong>American Community Survey</strong> is an ongoing survey conducted by the U.S. Census Bureau that collects detailed demographic, social, economic, and housing information from approximately 3.5 million households each year. Unlike the decennial Census (which counts everyone every 10 years), the ACS provides yearly estimates. The <strong>5-Year ACS</strong> combines five years of data to produce reliable estimates for small populations and geographies &mdash; this is what we use, since Ohio's Albanian population is relatively small in statistical terms.</p>
+    <p style="margin-top:8px;">The ACS produces <strong>published summary tables</strong> (like B04006 for ancestry, B05006 for place of birth, B16001 for language). These are aggregated, ready-to-use counts. However, they don't let you cross-reference variables &mdash; you can't, for example, ask "how many Kosovo-born people also report Albanian ancestry?" For that, you need PUMS.</p>
+  </div>
+
+  <div class="card">
+    <h3>What is PUMS (Public Use Microdata Sample)?</h3>
+    <p><strong>PUMS</strong> stands for <em>Public Use Microdata Sample</em>. It's the individual-level (person-by-person) data behind the ACS. Each row represents one real person, with all their survey responses: ancestry, place of birth, language, education, occupation, income, age, and more. To protect privacy, PUMS strips out names and exact addresses &mdash; the smallest geography it provides is the <strong>PUMA</strong> (Public Use Microdata Area), a region of roughly 100,000&ndash;200,000 people.</p>
+    <p style="margin-top:8px;">Crucially, PUMS is a <em>sample</em>, not a full count. Each person record carries a <strong>person weight</strong> (PWGTP) indicating how many people in the real population that record represents. All population estimates in this report are <strong>weighted</strong> &mdash; we sum the weights, not the raw record counts. The Ohio 5-Year PUMS file contains ~584,000 records representing Ohio's ~11.8 million residents.</p>
+  </div>
+
+  <div class="card">
+    <h3>Key ACS Tables We Use</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Table</th><th>Name</th><th>What It Tells Us</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>B04006</strong></td>
+          <td>People Reporting Ancestry</td>
+          <td>How many people wrote "Albanian" as their ancestry. This is the most-cited number but dramatically undercounts the community because Kosovars, Macedonian Albanians, and others often report different ancestry labels.</td>
+        </tr>
+        <tr>
+          <td><strong>B05006</strong></td>
+          <td>Place of Birth (Foreign-Born)</td>
+          <td>How many people were born in Albania, Kosovo, North Macedonia, Montenegro, etc. Captures foreign-born regardless of what ancestry they reported.</td>
+        </tr>
+        <tr>
+          <td><strong>B16001</strong></td>
+          <td>Language Spoken at Home</td>
+          <td>How many people speak Albanian at home. Useful as a supplementary indicator, though many second-generation Albanians speak only English.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Key PUMS Variables We Use</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Variable</th><th>Name</th><th>Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ANC1P / ANC2P</strong></td><td>Ancestry (1st &amp; 2nd)</td><td>Code 100 = Albanian. This is what people write in the ancestry field. Our primary filter.</td></tr>
+        <tr><td><strong>POBP</strong></td><td>Place of Birth</td><td>Code 100 = Albania, 167 = Kosovo. We include all Albania/Kosovo-born people as likely ethnic Albanians. For Montenegro (168), N. Macedonia (152), Serbia (154), Yugoslavia (147), we only include those who <em>also</em> report Albanian ancestry, since these countries have mixed populations.</td></tr>
+        <tr><td><strong>PWGTP</strong></td><td>Person Weight</td><td>The multiplier for each record. Essential for accurate population estimates. A record with PWGTP=25 represents 25 people in the real population.</td></tr>
+        <tr><td><strong>AGEP</strong></td><td>Age</td><td>Used for age distribution and filtering (e.g., education stats use age 25+).</td></tr>
+        <tr><td><strong>SCHL</strong></td><td>Educational Attainment</td><td>Highest level of education completed. Mapped to standard categories.</td></tr>
+        <tr><td><strong>OCCP</strong></td><td>Occupation</td><td>Census occupation code, grouped into broad categories.</td></tr>
+        <tr><td><strong>PINCP</strong></td><td>Total Person Income</td><td>Used for income distribution and median income calculations.</td></tr>
+        <tr><td><strong>YOEP</strong></td><td>Year of Entry</td><td>When foreign-born individuals first came to the U.S. Reveals migration waves.</td></tr>
+        <tr><td><strong>CIT</strong></td><td>Citizenship Status</td><td>Born in US, naturalized, or non-citizen.</td></tr>
+        <tr><td><strong>PUMA</strong></td><td>Public Use Microdata Area</td><td>Geographic area (~100K-200K people). The finest geography available in PUMS.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <strong>Why &ldquo;Broad Estimate&rdquo; &ne; &ldquo;ACS Ancestry Count&rdquo;</strong><br>
+    The ACS ancestry count (~4,100 for Ohio) only includes people who explicitly wrote "Albanian" as their ancestry. The PUMS broad estimate (~4,600) adds people born in Albania or Kosovo who didn't report Albanian ancestry. Both numbers are likely significant undercounts &mdash; community organizations estimate the true ethnic Albanian population in Ohio at 10,000&ndash;25,000, since many Kosovars report "Kosovar" or "European" ancestry, and second-generation Americans may report no specific ancestry at all.
+  </div>
+</section>
+
+<!-- ==================== POPULATION ==================== -->
+<section id="population">
+  <h2><span class="icon">&#128101;</span> Population Estimates</h2>
+
+  <h3>ACS Ancestry Data vs. Broad Estimates</h3>
+  <div class="chart-wrap">
+    <canvas id="chart-pop-trend" height="100"></canvas>
+  </div>
+
+  <h3>Cross-Referencing Multiple Census Variables</h3>
+  <div class="card">
+    <p>A comprehensive count requires unioning several ACS/PUMS variables:</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Variable</th><th>What It Captures</th><th>PUMS Code</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ANC1P / ANC2P</strong></td><td>Self-reported Albanian ancestry</td><td>100</td></tr>
+        <tr><td><strong>POBP</strong> — Albania</td><td>Born in Albania</td><td>100</td></tr>
+        <tr><td><strong>POBP</strong> — Kosovo</td><td>Born in Kosovo</td><td>167</td></tr>
+        <tr><td><strong>POBP</strong> — N. Macedonia</td><td>Born in North Macedonia (incl. ethnic Albanians)</td><td>152</td></tr>
+        <tr><td><strong>POBP</strong> — Montenegro</td><td>Born in Montenegro (incl. ethnic Albanians)</td><td>168</td></tr>
+        <tr><td><strong>LANP</strong></td><td>Albanian language spoken at home</td><td>See data dict</td></tr>
+        <tr><td><strong>B05006</strong></td><td>Published table: Foreign-born by country of birth</td><td>—</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="sources">PUMS codes may vary by vintage. Always verify against the data dictionary for your specific ACS year.</p>
+  </div>
+
+  <h3>Place of Birth Breakdown (Ohio ethnic Albanians)</h3>
+  <div class="chart-grid">
+    <div class="chart-wrap"><canvas id="chart-birthplace" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart-citizenship" height="140"></canvas></div>
+  </div>
+</section>
+
+<!-- ==================== GEOGRAPHY ==================== -->
+<section id="geography">
+  <h2><span class="icon">&#127758;</span> Geographic Distribution</h2>
+
+  <div class="map-controls">
+    <button class="active" onclick="showMap('columbus')">Columbus Metro</button>
+    <button onclick="showMap('cleveland')">Cleveland Metro</button>
+    <button onclick="showMap('ohio')">All Ohio</button>
+  </div>
+  <div id="map-columbus"></div>
+  <div id="map-cleveland" style="display:none"></div>
+  <div id="map-ohio" style="display:none"></div>
+
+  <h3>Population by Area (PUMA-level estimates)</h3>
+  <div class="chart-wrap">
+    <canvas id="chart-puma" height="110"></canvas>
+  </div>
+
+  <h3>Columbus Metro — Concentration Areas</h3>
+  <div class="chart-wrap">
+    <canvas id="chart-columbus-areas" height="90"></canvas>
+  </div>
+</section>
+
+<!-- ==================== DEMOGRAPHICS ==================== -->
+<section id="demographics">
+  <h2><span class="icon">&#128100;</span> Demographic Profile</h2>
+
+  <div class="chart-grid">
+    <div class="chart-wrap"><canvas id="chart-age" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart-gender" height="140"></canvas></div>
+  </div>
+</section>
+
+<!-- ==================== EDUCATION ==================== -->
+<section id="education">
+  <h2><span class="icon">&#127891;</span> Education &amp; Language</h2>
+
+  <div class="chart-grid">
+    <div class="chart-wrap"><canvas id="chart-edu" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart-lang" height="140"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h3>Education-Employment Paradox (Harvard Growth Lab Finding)</h3>
+    <p>The Harvard CID/Growth Lab study (Nedelkoska &amp; Khaw, 2015) found a striking <strong>education-employment mismatch</strong> among first-generation Albanian Americans: they are <em>more educated</em> than comparable non-Albanian Americans, yet <em>over-represented in low-skill occupations</em> and earn <em>less</em> than comparable peers. This reflects credential recognition barriers, language challenges, and occupational channeling into ethnic-network industries (construction, food service).</p>
+    <p style="margin-top:8px;">The second generation shows a reversal: low-skilled Albanian Americans earn significantly <em>more</em> than peers (ethnic network premium), while highly-skilled earn <em>less</em> (possible barriers in professional advancement).</p>
+    <p class="sources">Source: Nedelkoska &amp; Khaw (2015). "The Albanian Community in the United States." Harvard CID Working Paper.</p>
+  </div>
+</section>
+
+<!-- ==================== OCCUPATION ==================== -->
+<section id="occupation">
+  <h2><span class="icon">&#128188;</span> Work &amp; Income</h2>
+
+  <div class="chart-grid">
+    <div class="chart-wrap"><canvas id="chart-occ" height="160"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart-income" height="160"></canvas></div>
+  </div>
+</section>
+
+<!-- ==================== MIGRATION ==================== -->
+<section id="migration">
+  <h2><span class="icon">&#9992;&#65039;</span> Migration Timeline</h2>
+
+  <div class="chart-wrap">
+    <canvas id="chart-yoe" height="90"></canvas>
+  </div>
+
+  <div class="card">
+    <p>The year-of-entry distribution reveals the key migration waves: a small pre-1980 cohort from early/mid-20th century immigration, a moderate 1980s flow, the massive post-Communist wave of the 1990s (driven by Albania's collapse in 1991 and the Kosovo war in 1998-99), continued family reunification in the 2000s, and a tapering flow in recent years.</p>
+  </div>
+</section>
+
+<!-- ==================== HISTORY ==================== -->
+<section id="history">
+  <h2><span class="icon">&#128214;</span> Historical Context</h2>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-event">
+        <div class="year">1890s-1900s — First Wave</div>
+        <div class="desc">Early Albanian immigrants arrive in Ohio's industrial cities. Cleveland becomes a primary destination, drawn by factory and steel mill jobs. Most from Kor&ccedil;&euml; region in southern Albania.</div>
+      </div>
+      <div class="tl-event">
+        <div class="year">1900-1938 — Community Formation</div>
+        <div class="desc">Sustained immigration. Albanian newspapers, Orthodox and Muslim institutions established in Cleveland. Community infrastructure takes shape.</div>
+      </div>
+      <div class="tl-event">
+        <div class="year">1945-1960 — Post-WWII Displaced Persons</div>
+        <div class="desc">Refugees from DP camps in Italy, Germany, Austria. Ethnic Albanians from Kosovo and Macedonia displaced by WWII and early Communist Yugoslavia. Many settle in Cleveland's west side.</div>
+      </div>
+      <div class="tl-event">
+        <div class="year">1961-1990 — Cold War Era</div>
+        <div class="desc">Albania seals borders under Hoxha's Communist regime. Limited immigration from Kosovo/Macedonia within Yugoslavia. Cleveland community grows via natural increase.</div>
+      </div>
+      <div class="tl-event">
+        <div class="year">1991-1997 — Post-Communist Wave</div>
+        <div class="desc">Fall of Albanian communism (1991) triggers massive emigration. Thousands arrive in Ohio, settling in Cleveland and Columbus. Columbus Albanian community begins significant growth.</div>
+      </div>
+      <div class="tl-event">
+        <div class="year">1998-1999 — Kosovo War <span class="badge">Major Wave</span></div>
+        <div class="desc">Kosovo War displaces 1+ million ethnic Albanians. U.S. admits ~13,000 refugees. Columbus, a major refugee resettlement city via CRIS Ohio, receives a significant number. This wave transforms Columbus into a major Albanian hub.</div>
+      </div>
+      <div class="tl-event">
+        <div class="year">2000-Present — Continued Growth</div>
+        <div class="desc">Family reunification, diversity lottery, and continued flows from Kosovo, Albania, North Macedonia, and Montenegro. Columbus community continues to grow and formalize.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NATIONAL COMPARISON ==================== -->
+<section id="comparison">
+  <h2><span class="icon">&#127482;&#127480;</span> National Comparison</h2>
+
+  <div class="chart-wrap">
+    <canvas id="chart-states" height="120"></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Why Ohio's Census Number is Misleadingly Low</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>State</th><th>ACS Ancestry Count</th><th>Broad Estimate</th><th>Ratio</th></tr></thead>
+      <tbody id="state-table-body">
+        <!-- Filled by JS -->
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:10px;font-size:.9rem;">Ohio shows the <strong>highest ratio of broad estimate to Census count</strong> (~3.7x), reflecting the large Kosovo-origin population that doesn't self-report as "Albanian" ancestry. States with older, more established Albanian-origin communities (New York, Massachusetts) have lower ratios because more people self-identify with Albanian ancestry.</p>
+  </div>
+</section>
+
+<!-- ==================== METHODOLOGY ==================== -->
+<section id="methodology">
+  <h2><span class="icon">&#128295;</span> Data Sources &amp; Methodology</h2>
+
+  <div class="card">
+    <h3>Primary Data Sources</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Source</th><th>Data Used</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>ACS Table B04006</strong></td>
+          <td>Self-reported ancestry — "Albanian" line</td>
+          <td><a href="https://data.census.gov/table/ACSDT5Y2022.B04006" target="_blank">data.census.gov</a></td>
+        </tr>
+        <tr>
+          <td><strong>ACS Table B05006</strong></td>
+          <td>Place of birth — foreign-born by country</td>
+          <td><a href="https://data.census.gov/table/ACSDT5Y2022.B05006" target="_blank">data.census.gov</a></td>
+        </tr>
+        <tr>
+          <td><strong>ACS Table B16001</strong></td>
+          <td>Language spoken at home — Albanian speakers</td>
+          <td><a href="https://data.census.gov/table/ACSDT5Y2022.B16001" target="_blank">data.census.gov</a></td>
+        </tr>
+        <tr>
+          <td><strong>ACS PUMS Microdata</strong></td>
+          <td>Individual-level records (ancestry, birthplace, education, income, etc.)</td>
+          <td><a href="https://www.census.gov/programs-surveys/acs/microdata.html" target="_blank">census.gov/microdata</a></td>
+        </tr>
+        <tr>
+          <td><strong>Harvard Growth Lab / CID</strong></td>
+          <td>Statistical profiling of Albanian Americans (2015)</td>
+          <td><a href="https://growthlab.hks.harvard.edu/publications/albanian-community-united-states-statistical-profiling-albanian-americans" target="_blank">Harvard Growth Lab</a></td>
+        </tr>
+        <tr>
+          <td><strong>IPUMS USA</strong></td>
+          <td>Harmonized PUMS data with enhanced documentation</td>
+          <td><a href="https://usa.ipums.org/usa/" target="_blank">usa.ipums.org</a></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Reproducibility — How to Verify &amp; Improve</h3>
+    <p>This project is designed to be fully reproducible. Here's how:</p>
+    <ol style="margin:12px 0 0 20px;font-size:.92rem;">
+      <li><strong>Clone the repo</strong> and install Python dependencies: <code>pip install -r scripts/requirements.txt</code></li>
+      <li><strong>Get a Census API key</strong> (free): <a href="https://api.census.gov/data/key_signup.html" target="_blank">api.census.gov/data/key_signup.html</a></li>
+      <li><strong>Download raw Census tables</strong>: <code>python scripts/01_download_census_data.py</code></li>
+      <li><strong>Download Ohio PUMS</strong> from <a href="https://www2.census.gov/programs-surveys/acs/data/pums/2023/5-Year/csv_poh.zip">Census FTP</a> → unzip to <code>data/raw/</code></li>
+      <li><strong>Process PUMS</strong>: <code>python scripts/02_process_pums.py</code></li>
+      <li><strong>Open index.html</strong> — all charts auto-load from the JSON in <code>data/processed/</code></li>
+    </ol>
+    <p style="margin-top:12px;font-size:.9rem;">Contributions welcome! Add new data sources, fix POBP codes, improve PUMA mappings, or enhance the visualizations.</p>
+  </div>
+
+  <div class="callout info">
+    <strong>PUMS Download Links (Ohio Person File)</strong><br>
+    ACS 5-Year 2020-2024: <a href="https://www2.census.gov/programs-surveys/acs/data/pums/2024/5-Year/csv_poh.zip">csv_poh.zip (2024)</a><br>
+    ACS 5-Year 2019-2023: <a href="https://www2.census.gov/programs-surveys/acs/data/pums/2023/5-Year/csv_poh.zip">csv_poh.zip (2023)</a><br>
+    Data Dictionary: <a href="https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2020-2024.pdf">PDF (2020-2024)</a>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer class="footer">
+  <p><strong>Albanians in Ohio</strong> — Open Research Project</p>
+  <p>Data: U.S. Census Bureau ACS, PUMS Microdata, Harvard Growth Lab/CID</p>
+  <p>All data is publicly available. This project is open-source. <a href="https://github.com/eltonkola/albanian-ohio" target="_blank">Fork on GitHub</a></p>
+  <p style="margin-top:8px;">Licensed under MIT. Last updated March 2026.</p>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

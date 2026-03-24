@@ -1,0 +1,12 @@
+{
+  "total_columbus_broad": 376,
+  "total_columbus_core": 225,
+  "total_columbus_ancestry_only": 253,
+  "unweighted_records": 13,
+  "puma_prefixes_used": [
+    "034",
+    "037",
+    "038"
+  ],
+  "note": "Core = Franklin County PUMAs (034xx). Broad metro includes Delaware/Fairfield/Licking area PUMAs (037xx, 038xx). Ancestry-only = self-reported Albanian ancestry (ANC1P/ANC2P=100)."
+}

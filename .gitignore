@@ -1,0 +1,17 @@
+# Large PUMS data files (download manually)
+data/raw/psam_*.csv
+data/raw/*.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

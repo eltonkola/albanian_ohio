@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albanians in Columbus Metro — Open Research Project</title>
+<meta name="description" content="Census-derived data on the Albanian and Kosovar population in the Columbus, Ohio metropolitan area. PUMS microdata analysis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <span class="eagle">&#129413;</span>
+  <h1>Albanians in Columbus</h1>
+  <p class="subtitle">A focused look at the Albanian &amp; Kosovar population in the Columbus metropolitan area, derived from U.S. Census PUMS microdata filtered to Franklin County and surrounding PUMAs.</p>
+  <p class="meta-line">Data: ACS 2019-2023 PUMS &bull; Franklin + Delaware/Fairfield/Licking area PUMAs &bull; Last updated March 2026</p>
+</header>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <a href="index.html">&larr; Ohio Statewide</a>
+  <a href="#summary">Summary</a>
+  <a href="#population">Population</a>
+  <a href="#geography">Geography</a>
+  <a href="#demographics">Demographics</a>
+  <a href="#education">Education</a>
+  <a href="#occupation">Work &amp; Income</a>
+  <a href="#migration">Migration</a>
+  <a href="#community">Community</a>
+  <a href="#methodology">Methods</a>
+  <a href="https://github.com/eltonkola/albanian-ohio" target="_blank" style="margin-left:auto;color:#6c9;">GitHub &rarr;</a>
+</nav>
+
+<div class="container">
+
+<!-- ==================== SUMMARY ==================== -->
+<section id="summary">
+  <h2><span class="icon">&#128202;</span> Columbus Metro Summary</h2>
+  <div class="stats-row" id="stats-row">
+    <!-- Filled by JS -->
+  </div>
+  <div class="card">
+    <p>The Columbus metropolitan area is home to a growing Albanian and Kosovar community, largely established through post-1990s migration waves — particularly the Kosovo War refugee resettlement of 1998-1999. Columbus was a major resettlement city via CRIS Ohio (Community Refugee &amp; Immigration Services), and the community has continued growing through family reunification and new arrivals.</p>
+    <p style="margin-top:10px;">The PUMS data shown here covers the <strong>Columbus metro PUMAs</strong>: Franklin County (core) plus adjacent Delaware/Fairfield/Licking area PUMAs. With ~376 people in the broad estimate from only 13 unweighted PUMS records, these numbers carry higher margins of error than the statewide data. They should be interpreted as directional indicators rather than precise counts.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Small Sample Caveat</strong><br>
+    PUMS microdata for small populations in specific geographies can have wide confidence intervals. The Columbus metro subset draws from 13 unweighted records (each representing ~29 people on average). The ACS B04006 published table reports 151 Albanian-ancestry individuals in Franklin County. Cross-referencing with birthplace data yields a broader estimate of ~376. For the statewide picture with larger sample sizes, see the <a href="index.html">Ohio statewide page</a>.
+  </div>
+</section>
+
+<!-- ==================== POPULATION ==================== -->
+<section id="population">
+  <h2><span class="icon">&#128101;</span> Population Estimates</h2>
+
+  <h3>Place of Birth — Columbus Metro Ethnic Albanians</h3>
+  <div class="chart-grid">
+    <div class="chart-wrap"><canvas id="chart-birthplace" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart-citizenship" height="140"></canvas></div>
+  </div>
+</section>
+
+<!-- ==================== GEOGRAPHY ==================== -->
+<section id="geography">
+  <h2><span class="icon">&#127758;</span> Geographic Distribution</h2>
+
+  <div id="map-columbus"></div>
+
+  <h3>Population by PUMA Area</h3>
+  <div class="chart-wrap">
+    <canvas id="chart-puma" height="90"></canvas>
+  </div>
+
+  <h3>Columbus Metro — Known Concentration Areas</h3>
+  <div class="chart-wrap">
+    <canvas id="chart-columbus-areas" height="90"></canvas>
+  </div>
+</section>
+
+<!-- ==================== DEMOGRAPHICS ==================== -->
+<section id="demographics">
+  <h2><span class="icon">&#128100;</span> Demographic Profile</h2>
+
+  <div class="chart-grid">
+    <div class="chart-wrap"><canvas id="chart-age" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart-gender" height="140"></canvas></div>
+  </div>
+</section>
+
+<!-- ==================== EDUCATION ==================== -->
+<section id="education">
+  <h2><span class="icon">&#127891;</span> Education</h2>
+
+  <div class="chart-wrap">
+    <canvas id="chart-edu" height="140"></canvas>
+  </div>
+</section>
+
+<!-- ==================== OCCUPATION ==================== -->
+<section id="occupation">
+  <h2><span class="icon">&#128188;</span> Work &amp; Income</h2>
+
+  <div class="chart-grid">
+    <div class="chart-wrap"><canvas id="chart-occ" height="160"></canvas></div>
+    <div class="chart-wrap"><canvas id="chart-income" height="160"></canvas></div>
+  </div>
+</section>
+
+<!-- ==================== MIGRATION ==================== -->
+<section id="migration">
+  <h2><span class="icon">&#9992;&#65039;</span> Migration Timeline</h2>
+
+  <div class="chart-wrap">
+    <canvas id="chart-yoe" height="90"></canvas>
+  </div>
+
+  <div class="card">
+    <p>The Columbus Albanian community is distinctly newer than Cleveland's. The year-of-entry data shows arrivals concentrated in the 2000s and 2010s, reflecting the post-Kosovo War resettlement wave and subsequent family reunification. Unlike Cleveland (which has roots in the early 1900s), Columbus's Albanian community is overwhelmingly first-generation.</p>
+  </div>
+</section>
+
+<!-- ==================== COMMUNITY ==================== -->
+<section id="community">
+  <h2><span class="icon">&#127970;</span> Community &amp; Institutions</h2>
+
+  <div class="card">
+    <h3>Columbus Albanian Community Profile</h3>
+    <p>The Columbus Albanian community is centered in <strong>North Columbus</strong>, particularly along the Karl Road corridor, Worthington/Linworth, and extending into Westerville and Dublin. The community includes a mix of restaurants, cultural organizations, and religious institutions. Key neighborhoods include:</p>
+    <div id="institutions-list">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== METHODOLOGY ==================== -->
+<section id="methodology">
+  <h2><span class="icon">&#128295;</span> Data &amp; Methods</h2>
+
+  <div class="card">
+    <h3>How This Page Was Generated</h3>
+    <p>This page uses the same PUMS microdata processing pipeline as the statewide page, but filtered to Columbus metro area PUMAs. The filtering works as follows:</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Area</th><th>PUMA Prefix</th><th>Counties Covered</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Core</strong></td><td>034xx</td><td>Franklin County (Columbus proper)</td></tr>
+        <tr><td>Metro ring</td><td>037xx</td><td>Delaware / Union County area</td></tr>
+        <tr><td>Metro ring</td><td>038xx</td><td>Fairfield / Licking County area</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:10px;font-size:.9rem;">All population estimates are PWGTP-weighted. The same tiered Albanian filtering is used: Albanian ancestry (ANC1P/ANC2P=100) OR born in Albania/Kosovo (POBP 100/167) as core, plus Montenegro/N.Macedonia/Serbia/Yugoslavia born only if also Albanian ancestry.</p>
+  </div>
+
+  <div class="callout info">
+    <strong>Limitations</strong><br>
+    PUMA boundaries don't perfectly align with the official Columbus MSA definition. Some PUMAs in the 037xx and 038xx ranges may extend beyond the Columbus metro. Additionally, with only 13 unweighted PUMS records, individual demographic breakdowns have wide confidence intervals. The ACS B04006 county table provides a more precise ancestry count (151 for Franklin County) but doesn't allow cross-tabulation with birthplace or other variables.
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer class="footer">
+  <p><strong>Albanians in Columbus</strong> — Part of the <a href="index.html">Albanians in Ohio</a> Open Research Project</p>
+  <p>Data: U.S. Census Bureau ACS PUMS Microdata (2019-2023)</p>
+  <p><a href="https://github.com/eltonkola/albanian-ohio" target="_blank">Fork on GitHub</a> &bull; Licensed under MIT &bull; Last updated March 2026</p>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/columbus-app.js"></script>
+
+</body>
+</html>

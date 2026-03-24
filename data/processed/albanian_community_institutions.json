@@ -1,0 +1,123 @@
+{
+  "columbus_institutions": [
+    {
+      "name": "Velca Grill",
+      "type": "restaurant",
+      "address": "2151 E Dublin Granville Rd, Columbus, OH 43229",
+      "lat": 40.103,
+      "lng": -82.978,
+      "established": 2022,
+      "description": "Family-owned Albanian & Mediterranean restaurant in Linworth/Worthington area."
+    },
+    {
+      "name": "Cafe Illyria",
+      "type": "restaurant",
+      "address": "214 E State St, Columbus, OH 43215",
+      "lat": 39.9622,
+      "lng": -82.934,
+      "description": "Albanian-American diner. Breakfast, brunch, sandwiches."
+    },
+    {
+      "name": "Gooo Restaurant",
+      "type": "restaurant",
+      "address": "50 North St, Columbus, OH",
+      "lat": 39.9715,
+      "lng": -83.0018,
+      "description": "European/Albanian restaurant in downtown Columbus."
+    },
+    {
+      "name": "Macedonian Orthodox Cathedral of the Dormition",
+      "type": "religious",
+      "address": "400 Waggoner Rd, Reynoldsburg, OH 43068",
+      "lat": 39.955,
+      "lng": -82.801,
+      "established": 1958,
+      "description": "One of the oldest Macedonian Orthodox parishes in the US. Serves Macedonian and some Albanian Orthodox Christians."
+    }
+  ],
+  "cleveland_institutions": [
+    {
+      "name": "Albanian Cultural Garden",
+      "type": "cultural",
+      "address": "Rockefeller Park, Cleveland, OH",
+      "lat": 41.5189,
+      "lng": -81.6274,
+      "description": "Part of Cleveland's Cultural Gardens. Dedicated to Albanian heritage."
+    },
+    {
+      "name": "Albanian community of Lakewood",
+      "type": "community",
+      "address": "Lakewood, OH",
+      "lat": 41.482,
+      "lng": -81.7982,
+      "description": "Historic center of Albanian life in Greater Cleveland. Highest concentration of Albanian families in Ohio."
+    }
+  ],
+  "concentration_areas": {
+    "columbus": [
+      {
+        "name": "North Columbus / Karl Rd",
+        "lat": 40.06,
+        "lng": -82.97,
+        "intensity": 85
+      },
+      {
+        "name": "Worthington / Linworth",
+        "lat": 40.1,
+        "lng": -83.0,
+        "intensity": 70
+      },
+      {
+        "name": "Westerville",
+        "lat": 40.12,
+        "lng": -82.91,
+        "intensity": 45
+      },
+      {
+        "name": "Dublin / NW Columbus",
+        "lat": 40.09,
+        "lng": -83.1,
+        "intensity": 35
+      },
+      {
+        "name": "Reynoldsburg / East",
+        "lat": 39.95,
+        "lng": -82.8,
+        "intensity": 30
+      }
+    ],
+    "cleveland": [
+      {
+        "name": "Lakewood",
+        "lat": 41.482,
+        "lng": -81.7982,
+        "intensity": 95
+      },
+      {
+        "name": "Fairview Park",
+        "lat": 41.442,
+        "lng": -81.864,
+        "intensity": 75
+      },
+      {
+        "name": "Rocky River",
+        "lat": 41.4753,
+        "lng": -81.8387,
+        "intensity": 60
+      },
+      {
+        "name": "Cleveland West Side",
+        "lat": 41.4757,
+        "lng": -81.73,
+        "intensity": 50
+      },
+      {
+        "name": "Parma / Parma Heights",
+        "lat": 41.382,
+        "lng": -81.7229,
+        "intensity": 35
+      }
+    ]
+  },
+  "data_source": "CURATED \u2014 hand-compiled from public directories, news media, and community sources. Not Census-derived."
+}

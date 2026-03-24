@@ -1,0 +1,106 @@
+{
+  "albanian_by_state": [
+    {
+      "state": "New York",
+      "ancestry_count": 56226,
+      "fips": "36"
+    },
+    {
+      "state": "Michigan",
+      "ancestry_count": 27466,
+      "fips": "26"
+    },
+    {
+      "state": "Massachusetts",
+      "ancestry_count": 20752,
+      "fips": "25"
+    },
+    {
+      "state": "Florida",
+      "ancestry_count": 17534,
+      "fips": "12"
+    },
+    {
+      "state": "New Jersey",
+      "ancestry_count": 15000,
+      "fips": "34"
+    },
+    {
+      "state": "Illinois",
+      "ancestry_count": 14662,
+      "fips": "17"
+    },
+    {
+      "state": "Connecticut",
+      "ancestry_count": 11635,
+      "fips": "09"
+    },
+    {
+      "state": "Pennsylvania",
+      "ancestry_count": 9804,
+      "fips": "42"
+    },
+    {
+      "state": "Texas",
+      "ancestry_count": 6080,
+      "fips": "48"
+    },
+    {
+      "state": "California",
+      "ancestry_count": 5205,
+      "fips": "06"
+    },
+    {
+      "state": "Wisconsin",
+      "ancestry_count": 4869,
+      "fips": "55"
+    },
+    {
+      "state": "Ohio",
+      "ancestry_count": 3835,
+      "fips": "39"
+    },
+    {
+      "state": "Virginia",
+      "ancestry_count": 3473,
+      "fips": "51"
+    },
+    {
+      "state": "Missouri",
+      "ancestry_count": 2144,
+      "fips": "29"
+    },
+    {
+      "state": "Arizona",
+      "ancestry_count": 2138,
+      "fips": "04"
+    },
+    {
+      "state": "Georgia",
+      "ancestry_count": 1952,
+      "fips": "13"
+    },
+    {
+      "state": "Maryland",
+      "ancestry_count": 1855,
+      "fips": "24"
+    },
+    {
+      "state": "North Carolina",
+      "ancestry_count": 1829,
+      "fips": "37"
+    },
+    {
+      "state": "New Hampshire",
+      "ancestry_count": 1681,
+      "fips": "33"
+    },
+    {
+      "state": "Tennessee",
+      "ancestry_count": 1512,
+      "fips": "47"
+    }
+  ],
+  "total_us_ancestry": 209652,
+  "data_source": "ACS 5-Year B04006 (b04006_states_2023)"
+}

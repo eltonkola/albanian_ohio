@@ -1,0 +1,109 @@
+{
+  "ohio_albanian_by_county": [
+    {
+      "county": "Cuyahoga County",
+      "ancestry_count": 2277
+    },
+    {
+      "county": "Lake County",
+      "ancestry_count": 323
+    },
+    {
+      "county": "Summit County",
+      "ancestry_count": 217
+    },
+    {
+      "county": "Franklin County",
+      "ancestry_count": 151
+    },
+    {
+      "county": "Hamilton County",
+      "ancestry_count": 143
+    },
+    {
+      "county": "Stark County",
+      "ancestry_count": 108
+    },
+    {
+      "county": "Lorain County",
+      "ancestry_count": 100
+    },
+    {
+      "county": "Montgomery County",
+      "ancestry_count": 91
+    },
+    {
+      "county": "Trumbull County",
+      "ancestry_count": 68
+    },
+    {
+      "county": "Butler County",
+      "ancestry_count": 59
+    },
+    {
+      "county": "Richland County",
+      "ancestry_count": 55
+    },
+    {
+      "county": "Wood County",
+      "ancestry_count": 35
+    },
+    {
+      "county": "Medina County",
+      "ancestry_count": 31
+    },
+    {
+      "county": "Seneca County",
+      "ancestry_count": 30
+    },
+    {
+      "county": "Lucas County",
+      "ancestry_count": 28
+    },
+    {
+      "county": "Carroll County",
+      "ancestry_count": 25
+    },
+    {
+      "county": "Brown County",
+      "ancestry_count": 20
+    },
+    {
+      "county": "Geauga County",
+      "ancestry_count": 13
+    },
+    {
+      "county": "Portage County",
+      "ancestry_count": 13
+    },
+    {
+      "county": "Crawford County",
+      "ancestry_count": 9
+    },
+    {
+      "county": "Holmes County",
+      "ancestry_count": 8
+    },
+    {
+      "county": "Mahoning County",
+      "ancestry_count": 8
+    },
+    {
+      "county": "Belmont County",
+      "ancestry_count": 7
+    },
+    {
+      "county": "Tuscarawas County",
+      "ancestry_count": 7
+    },
+    {
+      "county": "Hancock County",
+      "ancestry_count": 5
+    },
+    {
+      "county": "Jefferson County",
+      "ancestry_count": 4
+    }
+  ],
+  "data_source": "ACS 5-Year B04006 (b04006_ohio_counties_2023)"
+}
