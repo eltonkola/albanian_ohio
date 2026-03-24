@@ -1,6 +1,6 @@
 # Albanians in Ohio — Open Research Project
 
-An open-source, cross-referenced research project on the **Albanian and Kosovar population in Ohio**, with a focus on the **Columbus metropolitan area**.
+An open-source, cross-referenced research project on the **Albanian population in Ohio**, with a focus on the **Columbus metropolitan area**.
 
 **[View the live report →](https://eltonkola.github.io/albanian-ohio/)**
 
